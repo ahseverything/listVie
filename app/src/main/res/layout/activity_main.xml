@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/imageView11"
+        android:layout_width="413dp"
+        android:layout_height="732dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/blackbackground" />
+
+    <ImageView
+        android:id="@+id/imageView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="11dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView14"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:srcCompat="@drawable/linedivider"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <ImageView
+        android:id="@+id/imageView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="52dp"
+        app:layout_constraintBottom_toTopOf="@+id/seekBar"
+        app:srcCompat="@drawable/linedivider"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_editor_absoluteX="2dp" />
+
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.866"
+        app:layout_constraintStart_toEndOf="@+id/imageView5"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/settings" />
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toStartOf="@+id/imageView5"
+        app:layout_constraintHorizontal_bias="0.132"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/off" />
+
+    <ExpandableListView
+        android:id="@+id/Expandable_ListView"
+        android:layout_width="417dp"
+        android:layout_height="280dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView12"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView5"
+        app:layout_constraintVertical_bias="0.0" >
+
+    </ExpandableListView>
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="110dp"
+        android:layout_height="61dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/led" />
+
+    <SeekBar
+        android:id="@+id/seekBar2"
+        android:layout_width="240dp"
+        android:layout_height="49dp"
+        android:layout_marginBottom="108dp"
+        android:indeterminate="false"
+        android:progressDrawable="@drawable/blackbackground"
+        android:thumb="@drawable/brightness1"
+        android:thumbOffset="@dimen/cardview_default_radius"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView11"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.526"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="228dp"
+        android:layout_height="56dp"
+        android:layout_marginBottom="12dp"
+        android:thumb="@drawable/speed3"
+        android:thumbOffset="@dimen/cardview_default_radius"
+        android:progressDrawable="@drawable/blackbackground"
+        app:layout_constraintBottom_toTopOf="@+id/seekBar2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageViewSeekbarSpeed"
+        android:layout_width="222dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginRight="12dp"
+        android:src="@drawable/seekbar"
+        app:layout_constraintBottom_toBottomOf="@+id/seekBar"
+        app:layout_constraintEnd_toEndOf="@+id/seekBar"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/seekBar"
+        app:layout_constraintTop_toTopOf="@+id/seekBar"
+        app:layout_constraintVertical_bias="0.52" />
+
+    <ImageView
+        android:id="@+id/imageViewPreview"
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/blankpreview"
+        app:layout_constraintBottom_toBottomOf="@id/imageView14"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/imageView12" />
+
+    <ImageView
+        android:id="@+id/imageViewPlay"
+        android:layout_width="92dp"
+        android:layout_height="87dp"
+        app:srcCompat="@drawable/play"
+        tools:layout_editor_absoluteY="331dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/imageView12"
+        app:layout_constraintBottom_toBottomOf="@id/imageView14"
+        />
+    <ImageView
+        android:id="@+id/imageViewPause"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:src="@drawable/pause"
+        app:layout_constraintTop_toBottomOf="@id/imageViewPlay"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/imageViewSeekbarSpeed"
+        />
+    <ImageView
+        android:id="@+id/imageViewPrevious"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/previous"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/imageViewPause"
+        app:layout_constraintTop_toBottomOf="@id/imageView14"
+        app:layout_constraintBottom_toTopOf="@id/imageViewSeekbarSpeed"
+        android:layout_marginLeft="100dp"
+        android:layout_marginBottom="25dp"
+        />
+
+    <ImageView
+        android:id="@+id/imageViewNext"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/next"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/imageViewPause"
+        app:layout_constraintTop_toBottomOf="@id/imageView14"
+        app:layout_constraintBottom_toTopOf="@id/imageViewSeekbarSpeed"
+        android:layout_marginRight="100dp"
+        android:layout_marginBottom="25dp"
+        />
+
+
+
+
+
+    <ImageView
+        android:id="@+id/imageViewSeekbarBrightness"
+        android:layout_width="229dp"
+        android:layout_height="21dp"
+        android:src="@drawable/seekbar"
+        app:layout_constraintBottom_toBottomOf="@+id/seekBar2"
+        app:layout_constraintEnd_toEndOf="@+id/seekBar2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/seekBar2"
+        app:layout_constraintTop_toTopOf="@+id/seekBar2" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

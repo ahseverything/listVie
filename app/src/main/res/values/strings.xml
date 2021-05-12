@@ -1,0 +1,47 @@
+<resources>
+    <string name="app_name">listView</string>
+
+    //Groups from A-J
+    <string name="Fire">Fire</string>
+    <string name="Rainbow">Rainbow</string>
+    <string name="Flow">Flow</string>
+    <string name="Sparkle">Sparkle</string>
+    <string name="Love">Love</string>
+    <string name="Pulse">Pulse</string>
+    <string name="Fade">Fade</string>
+    <string name="Travel">Travel</string>
+    <string name="Beats">Beats</string>
+    <string name="Water">Water</string>
+
+
+
+    //Array list
+    <integer-array name="Fire">
+        <item>1</item>
+    </integer-array>
+    <integer-array name="Rainbow">
+        <item>1</item>
+        <item>2</item>
+    </integer-array>
+    <integer-array name="Flow">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </integer-array>
+    <integer-array name="Sparkle">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </integer-array>
+    <integer-array name="Love">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </integer-array>
+
+
+
+</resources>
