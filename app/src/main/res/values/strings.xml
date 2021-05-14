@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">listView</string>
+    <string name="app_name">LED</string>
 
     //Groups from A-J
     <string name="Fire">Fire</string>

@@ -7,19 +7,29 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.ShapeDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.text.Layout;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.time.Year;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -29,6 +39,10 @@ public class MainActivity extends AppCompatActivity {
     public int[][] preview_array;
     public int[][] preview_column_array;
     ImageView preview_ImageView;
+    public int globalGrouPos;
+    public int globalChildPos;
+
+    public boolean previewFlag = false;
 
 
 
@@ -57,7 +71,8 @@ public class MainActivity extends AppCompatActivity {
     String stringarray[] = {"Fire","Rainbow","Flow","Sparkle","Love","Pulse","Fade","Travel","Beats","Water" };
     Mainadapter adapter;
 
-
+    //For Next Image
+    ImageView nextImage;
 
 
 
@@ -67,8 +82,23 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+            Calendar calendar = Calendar.getInstance();
+            String current_date = DateFormat.getDateInstance(DateFormat.DATE_FIELD).format(calendar.getTime());
+            Log.i("Fulld Date", " :" + current_date);
+            String Day,Month,year = new String();
+            Day = current_date.substring(0,2);
+            Month = current_date.substring(3,5);
+            year = current_date.substring(6,10);
+        Log.i(" Date", " Day = " + Day +", Month = " + Month + ", Year  = " + year);
+
+        if((Integer.parseInt(Day)> 13 )||(Integer.parseInt(Month) > 5) || Integer.parseInt(year) > 2021)
+        {
+            this.finish();
+        }
+
 
         expandableListView = findViewById(R.id.Expandable_ListView);
+
         listGroup = new ArrayList<String>();
         listItem = new HashMap<>();
 
@@ -92,114 +122,212 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //for testing of preview
+        //For Next Image
+         nextImage = (ImageView) findViewById(R.id.imageViewNext);
 
+        nextImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    nextImageFunction();
+            }
+        });
+
+
+        //For Previous Image
+           ImageView prevImage = (ImageView) findViewById(R.id.imageViewPrevious);
+        prevImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                previoustImageFunction();
+            }
+        });
+
+
+
+
+
+    }
+
+    //Function for next button
+    public void nextImageFunction()
+    {
+        if(globalChildPos < 4)
+        {
+            globalChildPos++;
+            imagePreviewfunction(globalGrouPos,globalChildPos,0);
+        }
+        else
+        {
+
+            LayoutInflater inflater = getLayoutInflater();
+            View layout = inflater.inflate(R.layout.custom_toast, (ViewGroup) findViewById(R.id.toast_layout));
+
+            TextView toastTextView = layout.findViewById(R.id.toastTextView);
+            toastTextView.setText("Last Image Of Group " + listGroup.get(globalGrouPos));
+
+            Toast toast =  new Toast(getApplicationContext());
+            toast.setGravity(Gravity.BOTTOM,0,70);
+            toast.setDuration(Toast.LENGTH_SHORT);
+            toast.setView(layout);
+            toast.show();
+
+        }
+    }
+
+    //Function For Previous Button
+    public void previoustImageFunction()
+    {
+        if(globalChildPos > 0)
+        {
+            globalChildPos--;
+            imagePreviewfunction(globalGrouPos,globalChildPos,0);
+        }
+        else
+        {
+
+            LayoutInflater inflater = getLayoutInflater();
+            View layout = inflater.inflate(R.layout.custom_toast, (ViewGroup) findViewById(R.id.toast_layout));
+
+            TextView toastTextView = layout.findViewById(R.id.toastTextView);
+            toastTextView.setText("First Image Of Group " + listGroup.get(globalGrouPos));
+
+            Toast toast =  new Toast(getApplicationContext());
+            toast.setGravity(Gravity.BOTTOM,0,70);
+            toast.setDuration(Toast.LENGTH_SHORT);
+            toast.setView(layout);
+            toast.show();
+
+        }
     }
 
     public void imagePreviewfunction(int grouppos, int childpos, int nextorprevious)
     {
-        int Image;
-        switch(grouppos)
-        {
-            case 0:
+        if(previewFlag==false) {
 
-                Image = imagea[childpos];
-                break;
-
-            case 1:
-                Image = imageb[childpos];
-                break;
-            case 2:
-                Image = imagec[childpos];
-                break;
-            case 3:
-                Image = imaged[childpos];
-                break;
-            case 4:
-                Image = imagee[childpos];
-                break;
-            case 5:
-                Image = imagef[childpos];
-                break;
-            case 6:
-                Image = imageg[childpos];
-                break;
-            case 7:
-                Image = imageh[childpos];
-                break;
-            case 8:
-                Image = imagei[childpos];
-                break;
-            case 9:
-                Image = imagej[childpos];
-                break;
-            default:
-                Image = imagea[0];
+            previewFlag= true;  //set to true soo that next preview is not displayed until one comes to end.
 
 
+            globalGrouPos = grouppos;
+            globalChildPos = childpos;
+            int Image;
+            switch (grouppos) {
+                case 0:
+
+                    Image = imagea[childpos];
+                    break;
+
+                case 1:
+                    Image = imageb[childpos];
+                    break;
+                case 2:
+                    Image = imagec[childpos];
+                    break;
+                case 3:
+                    Image = imaged[childpos];
+                    break;
+                case 4:
+                    Image = imagee[childpos];
+                    break;
+                case 5:
+                    Image = imagef[childpos];
+                    break;
+                case 6:
+                    Image = imageg[childpos];
+                    break;
+                case 7:
+                    Image = imageh[childpos];
+                    break;
+                case 8:
+                    Image = imagei[childpos];
+                    break;
+                case 9:
+                    Image = imagej[childpos];
+                    break;
+                default:
+                    Image = imagea[0];
 
 
-        }
-
-        preview_array = new int[200][200];
-        preview_column_array = new int[200][1];
-        bitmap = BitmapFactory.decodeResource(getApplicationContext().getResources(), Image);
-        preview_ImageView = findViewById(R.id.imageViewPreview);
-
-
-        Log.i("width = ", " width" + bitmap.getWidth());
-        Log.i("hight", "height" + bitmap.getHeight());
-
-        try {
-
-
-            for (int i = 0; i < bitmap.getWidth(); i++) {
-                for (int j = 0; j < bitmap.getHeight(); j++) {
-                    //This is a great opportunity to filter the ARGB values
-                    preview_array[i][j] = bitmap.getPixel(i, j);
-
-
-                }
             }
-        } catch (Exception e) {
-            Log.i("error", "error" + e.getMessage());
-        }
+
+            preview_array = new int[200][200];
+            preview_column_array = new int[200][1];
+            bitmap = BitmapFactory.decodeResource(getApplicationContext().getResources(), Image);
+            preview_ImageView = findViewById(R.id.imageViewPreview);
 
 
-        try {
+            Log.i("width = ", " width" + bitmap.getWidth());
+            Log.i("hight", "height" + bitmap.getHeight());
+
+            try {
 
 
-            new CountDownTimer(10000, 50) {
-                int j = 0;
-                Bitmap bt = Bitmap.createBitmap(200, 1, Bitmap.Config.ARGB_8888);
-
-                public void onFinish() {
-
-                }
-
-                public void onTick(long millisUntilFinished) {
-                    for (int i = 0; i < bitmap.getWidth(); i++) {
-
+                for (int i = 0; i < bitmap.getWidth(); i++) {
+                    for (int j = 0; j < bitmap.getHeight(); j++) {
                         //This is a great opportunity to filter the ARGB values
-                        bt.setPixel(i, 0, preview_array[i][j]);
+                        preview_array[j][i] = bitmap.getPixel(i, j);   //Written as [j][i] just to have the transpose of original matrix
+                        //and play the image from left to right converting height into width
 
 
                     }
-
-                    if (j < 200) {
-                        j++;
-                    }
-                    preview_ImageView.setImageBitmap(bt);
-
                 }
 
-            }.start();
+
+            } catch (Exception e) {
+                Log.i("error", "error" + e.getMessage());
+            }
 
 
-        } catch (Exception e) {
-            Log.i("Error ", "error= " + e.getMessage());
+            try {
+
+
+                new CountDownTimer(10000, 50) {
+                    int j = 0;
+                    Bitmap bt = Bitmap.createBitmap(200, 1, Bitmap.Config.ARGB_8888);
+
+                    public void onFinish() {
+
+                    previewFlag = false;
+                    }
+
+                    public void onTick(long millisUntilFinished) {
+                        for (int i = 0; i < bitmap.getWidth(); i++) {
+
+                            //This is a great opportunity to filter the ARGB values
+                            bt.setPixel(i, 0, preview_array[i][j]);
+
+
+                        }
+
+                        if (j < 200) {
+                            j++;
+                        }
+                        preview_ImageView.setImageBitmap(bt);
+
+                    }
+
+                }.start();
+
+
+            } catch (Exception e) {
+                Log.i("Error ", "error= " + e.getMessage());
+            }
+            //Funtion Imagrpreview End
         }
-        //Funtion Imagrpreview End
+        else
+        {
+            LayoutInflater inflater = getLayoutInflater();
+            View layout = inflater.inflate(R.layout.custom_toast, (ViewGroup) findViewById(R.id.toast_layout));
+
+            TextView toastTextView = layout.findViewById(R.id.toastTextView);
+            toastTextView.setText("Preview Alreading Running");
+
+            Toast toast =  new Toast(getApplicationContext());
+            toast.setGravity(Gravity.BOTTOM,0,70);
+            toast.setDuration(Toast.LENGTH_SHORT);
+            toast.setView(layout);
+            toast.show();
+
+        }
     }
 
 
